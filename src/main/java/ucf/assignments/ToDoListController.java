@@ -4,8 +4,10 @@ package ucf.assignments;
  *  Copyright 2021 Kate Ingraham
  */
 
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -42,7 +44,6 @@ public class ToDoListController {
 
     //InputValidator checks item descriptions and due dates for proper formatting and validity.
     InputValidator inputV = new InputValidator();
-
 
     //This method formats the ToDoList item data for the GUI
     public void updateListView(ArrayList<Item> displayArray) {
@@ -300,5 +301,9 @@ public class ToDoListController {
 
     @FXML
     public void mInstructions(ActionEvent actionEvent) {
+        Alert dedication = new Alert(Alert.AlertType.NONE,"Please see full instructions on how to use this application at:\n" +
+                "https://github.com/kingraham228/Ingraham-cop3330-assignment4part2#readme",ButtonType.OK);
+        dedication.setTitle("Instructions");
+        dedication.show();
     }
 }
