@@ -18,6 +18,7 @@ import java.util.*;
 
 public class FileManager {
 
+    InputValidator iv = new InputValidator();
 
     //This method saves the ToDoList to a text file.
     public void saveOneList(ArrayList<Item> listItems, String filePath){
@@ -70,13 +71,30 @@ public class FileManager {
                 String dueDate = pieces[1];
                 pieces = dueDate.split("Status: ");
                 dueDate = pieces[0];
+
+                // Adjust for spacing issue with dueDate
+                if(dueDate.length()>10){
+                    char[] dueDateChars = dueDate.toCharArray();
+                    StringBuilder trimDate = new StringBuilder();
+                    for(int count=0; count<dueDateChars.length; count++){
+                        if(dueDateChars[count]!=' '){
+                            trimDate.append(dueDateChars[count]);
+                        }
+                    }
+                    dueDate = String.valueOf(trimDate);
+                }
                 String srStatus = pieces[1];
                 boolean status = false;
                 if(srStatus.equalsIgnoreCase("true")){
                     status = true;
                 }
-                Item parseItem = new Item(description,dueDate,status);
-                fileItems.add(parseItem);
+                //Validate description and dueDate requirements
+                boolean desValid = iv.checkDescription(description);
+                boolean dateValid = iv.checkDate(dueDate);
+                if(desValid&&dateValid){
+                    Item parseItem = new Item(description,dueDate,status);
+                    fileItems.add(parseItem);
+                }
             }
 
         }

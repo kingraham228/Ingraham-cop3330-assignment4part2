@@ -85,7 +85,7 @@ class FileManagerTest {
         ArrayList<Item> fileItems = fm.parseFileData(testFileData);
 
         String actual = fileItems.get(1).dueDate;
-        String expected = "2021-07-10   ";
+        String expected = "2021-07-10";
 
         assertEquals(expected,actual);
     }
