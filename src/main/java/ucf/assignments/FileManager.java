@@ -43,7 +43,7 @@ public class FileManager {
         }
     }
 
-
+    //This method opens a list from a file and adds it to the current ToDoList.
     public ArrayList<Item> openOneList(Path filename){
         ArrayList<String> fileData = new ArrayList<>();
         try(Scanner input = new Scanner(filename)){
@@ -59,6 +59,7 @@ public class FileManager {
         return fileItems;
     }
 
+    //This method parses data from a .txt file to create ToDoList items.
     public ArrayList<Item> parseFileData(ArrayList<String> fileData){
        ArrayList<Item> fileItems = new ArrayList<>();
         for(int i=0; i<fileData.size(); i++){
