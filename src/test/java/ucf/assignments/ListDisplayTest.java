@@ -1,5 +1,8 @@
 package ucf.assignments;
-
+/*
+ *  UCF COP3330 Summer 2021 Assignment 4 Solution
+ *  Copyright 2021 Kate Ingraham
+ */
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.CheckMenuItem;
 import org.junit.jupiter.api.DisplayName;

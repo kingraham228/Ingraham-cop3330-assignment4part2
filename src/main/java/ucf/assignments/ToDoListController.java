@@ -4,10 +4,8 @@ package ucf.assignments;
  *  Copyright 2021 Kate Ingraham
  */
 
-import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -48,13 +46,13 @@ public class ToDoListController {
     //This method formats the ToDoList item data for the GUI
     public void updateListView(ArrayList<Item> displayArray) {
         listView.getItems().clear();
-        for (int i = 0; i < displayArray.size(); i++) {
-            String description = displayArray.get(i).description;
-            String dueDate = displayArray.get(i).dueDate;
-            String status = "";
+        for (Item value : displayArray) {
+            String description = value.description;
+            String dueDate = value.dueDate;
+            String status;
 
             //Translate boolean completeStatus into more readable strings uncompleted or completed
-            if (displayArray.get(i).completeStatus == false) {
+            if (!value.completeStatus) {
                 status = "uncompleted";
             } else {
                 status = "completed";

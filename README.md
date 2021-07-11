@@ -1,5 +1,5 @@
 # Help instructions
-###Dedicated to Rey.
+#### Dedicated to Rey.
 ## Here is a list of how to access each required function :
 1. The application shall manage a single list of items
     - The list shall have the capacity to store at least 100 unique items

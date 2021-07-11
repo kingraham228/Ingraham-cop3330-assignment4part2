@@ -4,9 +4,6 @@ package ucf.assignments;
  *  Copyright 2021 Kate Ingraham
  */
 
-
-
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
