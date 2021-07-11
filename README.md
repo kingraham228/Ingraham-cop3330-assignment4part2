@@ -69,3 +69,8 @@
 16. The help screen shall include a dedication to "Rey"
 
      >*This function is accessed by clicking the "Help" menu and selecting the "Dedication" option. It is also included in this file.*
+
+17. Bonus: The application also allows the user to sort by due date.
+    >*This function is accessed by clicking the "Help" menu and selecting the "Dedication" option. It is also included in this file.*
+
+       

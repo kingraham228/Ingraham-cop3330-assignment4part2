@@ -114,10 +114,11 @@ public class ToDoListController {
         updateListView(view);
     }
 
+    //This method updates the item list when the user clicks the "Sort Items by Due Date" menu option
     @FXML
     public void mSortDueDateClicked() {
-        //call sortDisplayArray()
-        //call updateListView() with getDisplayArray()
+        ArrayList<Item> view = listDis.sortDisplayArray(userList);
+        updateListView(view);
     }
 
     //This method adds an item to the ToDoList when the user clicks the Add Item button

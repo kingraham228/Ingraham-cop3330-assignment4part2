@@ -44,6 +44,7 @@ public class ListDisplay {
         return viewItems;
     }
 
+    //This method sorts the ToDoList according to the due date.
     public ArrayList<Item> sortDisplayArray(ToDoList ul) {
         ArrayList<Item> sortItems = ul.getItems();
         //define a comparator for dueDate
