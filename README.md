@@ -1,4 +1,5 @@
 # Help instructions
+####Dedicated to Rey.
 ## Here is a list of how to access each required function :
 1. The application shall manage a single list of items
     - The list shall have the capacity to store at least 100 unique items
@@ -67,4 +68,4 @@
     
 16. The help screen shall include a dedication to "Rey"
 
-     >*This function is accessed by clicking the "Help" menu and selecting the "Dedication" option.*
+     >*This function is accessed by clicking the "Help" menu and selecting the "Dedication" option. It is also included in this file.*

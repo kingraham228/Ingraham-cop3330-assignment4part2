@@ -293,6 +293,9 @@ public class ToDoListController {
 
     @FXML
     public void mDedication(ActionEvent actionEvent) {
+        Alert dedication = new Alert(Alert.AlertType.NONE,"Dedicated to Rey.",ButtonType.OK);
+        dedication.setTitle("Dedication");
+        dedication.show();
     }
 
     @FXML
