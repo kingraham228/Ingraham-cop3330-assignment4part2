@@ -1,0 +1,73 @@
+@startuml
+class Item{
+-description: String
+-dueDate: Date
+-completeStatus: boolean
+}
+
+class ToDoList{
+-items: ArrayList
++addItem()
++editItem()
++removeItem()
++markComplete()
++getItems()
++clearItems()
++addArrayList()
+}
+
+class FileManager{
++saveOneList()
++openOneList()
++parseFileData()
+}
+
+class ListDisplay{
+-displayArray: ArrayList
++displayItems()
++displayUncompleted()
++displayCompleted()
++sortDisplayArray()
+}
+
+class ToDoController{
++mCheckUncompleted: CheckMenuItem
++mCheckCompleted: CheckMenuItem
++listView: ListView
++updateListView()
++mLoadListClicked()
++mSaveListClicked()
++mDisplayUncompletedClicked()
++mDisplayCompletedClicked()
++bAddItemClicked()
++bEditItemClicked()
++bDeleteItemClicked()
++bCompleteItemClicked()
++mSortDueDateClicked()
++bClearList()
++mDedication()
++mInstructions()
+}
+
+class App{
+main()
+start()
+}
+
+class InputValidator{
++checkDate()
++checkDescription()
++checkDay()
++checkMonth()
++checkLeapYear()
+}
+
+
+org.javafx.Application <|-- App
+App -- ToDoController
+ToDoController o-- ToDoList
+ToDoController o-- ListDisplay
+ToDoController o-- FileManager
+ToDoController o-- InputValidator
+ToDoList *-- Item
+@enduml
