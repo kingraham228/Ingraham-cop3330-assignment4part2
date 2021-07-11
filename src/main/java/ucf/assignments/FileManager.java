@@ -84,7 +84,7 @@ public class FileManager {
                 String srStatus = pieces[1];
                 boolean status = false;
                 //Convert status strings to boolean values
-                if (srStatus.equalsIgnoreCase("true")) {
+                if (srStatus.equalsIgnoreCase("completed")) {
                     status = true;
                 }
                 //Validate description and dueDate requirements
