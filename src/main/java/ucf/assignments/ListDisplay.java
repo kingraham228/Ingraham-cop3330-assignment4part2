@@ -7,6 +7,8 @@ package ucf.assignments;
 import javafx.scene.control.CheckMenuItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 //This class manages the appearance of the TodoList items.
 public class ListDisplay {
@@ -42,9 +44,18 @@ public class ListDisplay {
         return viewItems;
     }
 
-    public void sortDisplayArray() {
+    public ArrayList<Item> sortDisplayArray(ToDoList ul) {
+        ArrayList<Item> sortItems = ul.getItems();
         //define a comparator for dueDate
+        Comparator byDueDate = new Comparator<Item>() {
+            @Override
+            public int compare(Item o1, Item o2) {
+                return o1.dueDate.compareTo(o2.dueDate);
+            }
+        };
         //sort displayArray with Collections.sort on dueDate
+        Collections.sort(sortItems,byDueDate);
+        return sortItems;
     }
 
 }

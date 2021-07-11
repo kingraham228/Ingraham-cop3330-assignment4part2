@@ -3,7 +3,7 @@ package ucf.assignments;
  *  UCF COP3330 Summer 2021 Assignment 4 Solution
  *  Copyright 2021 Kate Ingraham
  */
-import javafx.beans.property.BooleanProperty;
+
 import javafx.scene.control.CheckMenuItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,23 +16,135 @@ class ListDisplayTest {
 
 
     @Test
+    @DisplayName("Test Sort First element")
     void sortDisplayArray_first_element() {
-        //create a new ListDisplay
-        //set displayArray equal to an unsorted list of items
-        //call sortDisplayArray()
-        //set expected string to the expected first sorted element of the displayArray
-        //set the actual string to the value of displayArray[0]
-        //assert that expected matches actual
+        ListDisplay listDis = new ListDisplay();
+        //Create a test TodoList
+        ToDoList test = new ToDoList();
+        String description = "Item One.";
+        String dueDate = "2021-07-01";
+        test.addItem(description,dueDate);
+        test.markComplete(0);
+        //add a second item
+        description = "Item Two.";
+        dueDate = "2021-07-10";
+        test.addItem(description,dueDate);
+        //add a third item
+        description = "Item Three.";
+        dueDate = "2022-08-20";
+        test.addItem(description,dueDate);
+        //add a fourth item
+        description = "Item four.";
+        dueDate = "1999-08-20";
+        test.addItem(description,dueDate);
+
+        //sort the list
+        ArrayList<Item> sorted = listDis.sortDisplayArray(test);
+
+        //Test first element
+        String actual = sorted.get(0).dueDate;
+        String expected = "1999-08-20";
+
+        assertEquals(expected,actual);
     }
 
     @Test
+    @DisplayName("Sort Test Last element")
     void sortDisplayArray_last_element() {
-        //create a new ListDisplay
-        //set displayArray equal to an unsorted list of items
-        //call sortDisplayArray()
-        //set expected string to the expected last sorted element of the displayArray
-        //set the actual string to the value of displayArray[arraysize-1]
-        //assert that expected matches actual
+        ListDisplay listDis = new ListDisplay();
+        //Create a test TodoList
+        ToDoList test = new ToDoList();
+        String description = "Item One.";
+        String dueDate = "2021-07-01";
+        test.addItem(description,dueDate);
+        test.markComplete(0);
+        //add a second item
+        description = "Item Two.";
+        dueDate = "2021-07-10";
+        test.addItem(description,dueDate);
+        //add a third item
+        description = "Item Three.";
+        dueDate = "2022-08-20";
+        test.addItem(description,dueDate);
+        //add a fourth item
+        description = "Item four.";
+        dueDate = "1999-08-20";
+        test.addItem(description,dueDate);
+
+        //sort the list
+        ArrayList<Item> sorted = listDis.sortDisplayArray(test);
+
+        //Test last element
+        String actual = sorted.get((sorted.size()-1)).dueDate;
+        String expected = "2022-08-20";
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Sort Test Mid element1")
+    void sortDisplayArray_mid_element1() {
+        ListDisplay listDis = new ListDisplay();
+        //Create a test TodoList
+        ToDoList test = new ToDoList();
+        String description = "Item One.";
+        String dueDate = "2021-07-01";
+        test.addItem(description,dueDate);
+        test.markComplete(0);
+        //add a second item
+        description = "Item Two.";
+        dueDate = "2021-07-10";
+        test.addItem(description,dueDate);
+        //add a third item
+        description = "Item Three.";
+        dueDate = "2022-08-20";
+        test.addItem(description,dueDate);
+        //add a fourth item
+        description = "Item four.";
+        dueDate = "1999-08-20";
+        test.addItem(description,dueDate);
+
+        //sort the list
+        ArrayList<Item> sorted = listDis.sortDisplayArray(test);
+
+        //Test mid element1
+        String actual = sorted.get(1).dueDate;
+        String expected = "2021-07-01";
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    @DisplayName("Sort Test Mid element2")
+    void sortDisplayArray_mid_element2() {
+        ListDisplay listDis = new ListDisplay();
+        //Create a test TodoList
+        ToDoList test = new ToDoList();
+        String description = "Item One.";
+        String dueDate = "2021-07-01";
+        test.addItem(description,dueDate);
+        test.markComplete(0);
+        //add a second item
+        description = "Item Two.";
+        dueDate = "2021-07-10";
+        test.addItem(description,dueDate);
+        //add a third item
+        description = "Item Three.";
+        dueDate = "2022-08-20";
+        test.addItem(description,dueDate);
+        //add a fourth item
+        description = "Item four.";
+        dueDate = "1999-08-20";
+        test.addItem(description,dueDate);
+
+        //sort the list
+        ArrayList<Item> sorted = listDis.sortDisplayArray(test);
+
+        //Test mid element2
+        String actual = sorted.get(2).dueDate;
+        String expected = "2021-07-10";
+
+        assertEquals(expected,actual);
     }
 
     @Test
@@ -126,4 +238,5 @@ class ListDisplayTest {
 
         assertEquals(expect2,act2);
     }
+
 }
