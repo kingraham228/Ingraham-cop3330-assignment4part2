@@ -57,7 +57,7 @@
     
 14. A user shall be able to load a list (and all of its items) from external storage
 
-    >*This function is accessed by clicking the "File" menu and selecting the "Open List" option. Note that the program is designed to open .txt files. Attempting to open other file formats will result in an error.*
+    >*This function is accessed by clicking the "File" menu and selecting the "Open List" option. Note that the program is designed to open .txt files. Attempting to open other file formats will result in an error. Additionally, please note that your text file will need to contain one item per line with the labels Description: Due Date: and Status: in order to load correctly into the program.*
 
 15. The developer shall provide a help screen with directions on how to use the application.
     - The help screen shall describe how to execute each behavioral requirement provided by the application (e.g. add an item, remove an item, edit an item, etc)

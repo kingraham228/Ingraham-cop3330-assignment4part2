@@ -74,6 +74,11 @@ public class ToDoListController {
             Path filePath = Path.of(file.getPath());
             ArrayList<Item> fileItems = fileM.openOneList(filePath);
             userList.addArrayList(fileItems);
+            if(fileItems.size()<1){
+                Alert fileLoad = new Alert(Alert.AlertType.ERROR);
+                fileLoad.setContentText("To open a file you must choose a .txt file formatted so that there is one item per line. Each line should include the labels Description:, Due Date:, and Status: to open into the list.");
+                fileLoad.show();
+            }
         }
         ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
         updateListView(view);
