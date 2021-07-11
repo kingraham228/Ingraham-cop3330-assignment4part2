@@ -15,10 +15,12 @@ class FileManagerTest {
 
     @Test
     @DisplayName("Open List Test")
+    //This test tries opening a valid .txt file.
     void openOneList() {
         FileManager fm = new FileManager();
         String filepath = "mytodolist.txt";
         ArrayList<Item> test = fm.openOneList(Path.of(filepath));
+        //Set comparison to the first description element that should be read in
         String actual = test.get(0).description;
         String expected = "This is a test item.   ";
         assertEquals(expected,actual);
@@ -27,6 +29,7 @@ class FileManagerTest {
 
     @Test
     @DisplayName("Test Save List")
+    //This test tries saving the existing toDoItems to an outside .txt file.
     void saveOneList() {
         FileManager fm = new FileManager();
         //Create testing TodoList
@@ -47,6 +50,7 @@ class FileManagerTest {
 
     @Test
     @DisplayName("Parsing Test One")
+    //Parsing test for valid items. Size 2.
     void parseFileData() {
         FileManager fm = new FileManager();
         ArrayList<String> testFileData = new ArrayList<>();
@@ -54,7 +58,7 @@ class FileManagerTest {
         testFileData.add("Description: Test item two.   Due Date: 2021-07-10   Status: uncompleted");
 
         ArrayList<Item> fileItems = fm.parseFileData(testFileData);
-
+        //Check the first description element
         String actual = fileItems.get(0).description;
         String expected = "This is a test item.   ";
 
@@ -63,6 +67,7 @@ class FileManagerTest {
 
     @Test
     @DisplayName("Parsing Test Two")
+    //Parsing test for valid items. Size 2.
     void parseFileData_two() {
         FileManager fm = new FileManager();
         ArrayList<String> testFileData = new ArrayList<>();
@@ -70,7 +75,7 @@ class FileManagerTest {
         testFileData.add("Description: Test item two.   Due Date: 2021-07-10   Status: uncompleted");
 
         ArrayList<Item> fileItems = fm.parseFileData(testFileData);
-
+        //check teh second element
         String actual = fileItems.get(1).description;
         String expected = "Test item two.   ";
 
@@ -79,6 +84,7 @@ class FileManagerTest {
 
     @Test
     @DisplayName("Parsing Test Due Date")
+    //Parsing test for valid items. Size 2.
     void parseFileData_dueDate() {
         FileManager fm = new FileManager();
         ArrayList<String> testFileData = new ArrayList<>();
@@ -86,7 +92,7 @@ class FileManagerTest {
         testFileData.add("Description: Test item two.   Due Date: 2021-07-10   Status: uncompleted");
 
         ArrayList<Item> fileItems = fm.parseFileData(testFileData);
-
+        //check the second element due date
         String actual = fileItems.get(1).dueDate;
         String expected = "2021-07-10";
 
@@ -95,6 +101,7 @@ class FileManagerTest {
 
     @Test
     @DisplayName("Parsing Test Status")
+        //Parsing test for valid items. Size 2.
     void parseFileData_Status() {
         FileManager fm = new FileManager();
         ArrayList<String> testFileData = new ArrayList<>();
@@ -102,7 +109,7 @@ class FileManagerTest {
         testFileData.add("Description: Test item two.   Due Date: 2021-07-10   Status: uncompleted");
 
         ArrayList<Item> fileItems = fm.parseFileData(testFileData);
-
+        //check the second item completeStatus
         boolean actual = fileItems.get(1).completeStatus;
         boolean expected = false;
 

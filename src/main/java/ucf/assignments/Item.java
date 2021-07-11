@@ -18,7 +18,7 @@ public class Item {
     }
 
     //This constructor allows for setting all states when editing an item.
-    public Item(String description, String dueDate, boolean completeStatus){
+    public Item(String description, String dueDate, boolean completeStatus) {
         this.description = description;
         this.dueDate = dueDate;
         this.completeStatus = completeStatus;

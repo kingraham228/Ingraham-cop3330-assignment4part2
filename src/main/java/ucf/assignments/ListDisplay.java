@@ -10,7 +10,7 @@ import javafx.scene.control.CheckMenuItem;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-
+//This class manages the appearance of the TodoList items.
 public class ListDisplay {
     private ArrayList<Item> displayArray = new ArrayList<>();
 
@@ -18,6 +18,7 @@ public class ListDisplay {
     public ArrayList<Item> displayItems(ToDoList userList,CheckMenuItem completed, CheckMenuItem uncompleted) {
         boolean viewCompleted = completed.isSelected();
         boolean viewUncompleted = uncompleted.isSelected();
+        //Checks menu selection status to return the appropriate array to display.
         if(viewCompleted&&!viewUncompleted){
             return displayCompleted(userList);
         }

@@ -4,9 +4,7 @@ package ucf.assignments;
  *  Copyright 2021 Kate Ingraham
  */
 
-import javax.print.DocFlavor;
-import java.util.Arrays;
-
+//This class validates input data from the user or a file.
 public class InputValidator {
 
     //This method checks to make sure that the due date for the item is entered in YYYY-MM-DD format.
@@ -15,10 +13,13 @@ public class InputValidator {
         if (dateArray.length != 10) {
             return false;
         } else {
+
             //Validate hyphens
             if (dateArray[4] == '-' && dateArray[7] == '-') {
+
                 //Validate the year. This will accept any year, even far in the past or future.
-                StringBuilder strYear= new StringBuilder();
+                StringBuilder strYear = new StringBuilder();
+                //If the year contains appropriate digits, convert it to an integer
                 for (int i = 0; i < 4; i++) {
                     if (!Character.isDigit(dateArray[i])) {
                         return false;
@@ -26,8 +27,10 @@ public class InputValidator {
                     strYear.append(dateArray[i]);
                 }
                 int year = Integer.parseInt(strYear.toString());
+
                 //Validate the month
                 StringBuilder strMonth = new StringBuilder();
+                //If the month contains appropriate digits, convert it to an integer
                 for (int i = 5; i < 7; i++) {
                     if (!Character.isDigit(dateArray[i])) {
                         return false;
@@ -37,8 +40,10 @@ public class InputValidator {
                 int month = Integer.parseInt(String.valueOf(strMonth));
                 boolean valid = checkMonth(month);
                 if (valid) {
+
                     //Validate the day
                     StringBuilder strDay = new StringBuilder();
+                    //If the day contains appropriate digits, convert it to an integer
                     for (int i = 8; i < 10; i++) {
                         if (!Character.isDigit(dateArray[i])) {
                             return false;
@@ -61,7 +66,9 @@ public class InputValidator {
     //This method checks that the day is valid within the Gregorian calendar.
     public boolean checkDay(int month, int day, int year) {
         if (day > 0 && day <= 31) {
+            //if the day number is valid, evaluate it based on the provided month
             switch (month) {
+                //Cases 1,3,5,7,8,10,12 are covered by the initial range check.
                 case 1:
                 case 3:
                 case 5:
@@ -70,6 +77,7 @@ public class InputValidator {
                 case 10:
                 case 12:
                     return true;
+                //February special case incorporates a leap year check
                 case 2:
                     boolean leapyear = checkLeapYear(year);
                     if (leapyear) {
@@ -77,6 +85,7 @@ public class InputValidator {
                     } else {
                         return day <= 28;
                     }
+                //Cases 4,5,9,11 modified for only 30 days
                 case 4:
                 case 6:
                 case 9:

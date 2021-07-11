@@ -18,7 +18,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Optional;
 
-
+//This class manages user interaction with the GUI.
 public class ToDoListController {
     //This attribute is the view selection menu item for uncompleted items
     @FXML
@@ -43,7 +43,7 @@ public class ToDoListController {
     //InputValidator checks item descriptions and due dates for proper formatting and validity.
     InputValidator inputV = new InputValidator();
 
-    //This method formats the ToDoList item data for the GUI
+    //This method formats the ToDoList item data for the GUI ListView
     public void updateListView(ArrayList<Item> displayArray) {
         listView.getItems().clear();
         for (Item value : displayArray) {
@@ -63,7 +63,7 @@ public class ToDoListController {
         }
     }
 
-
+    //This method initiates loading in a ToDoList from a file when the user selects the "Open" menu option
     @FXML
     public void mLoadListClicked(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -73,6 +73,7 @@ public class ToDoListController {
             Path filePath = Path.of(file.getPath());
             ArrayList<Item> fileItems = fileM.openOneList(filePath);
             userList.addArrayList(fileItems);
+            //Send error alert if the parser did not add any items.
             if(fileItems.size()<1){
                 Alert fileLoad = new Alert(Alert.AlertType.ERROR);
                 fileLoad.setContentText("To open a file you must choose a .txt file formatted so that there is one item per line. Each line should include the labels Description:, Due Date:, and Status: to open into the list.");
@@ -83,9 +84,8 @@ public class ToDoListController {
         updateListView(view);
     }
 
-
-    @FXML
     //This method launches a filechooser to get the filename to save the todoList when the menu item is selected.
+    @FXML
     public void mSaveListClicked(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save List");
@@ -168,6 +168,7 @@ public class ToDoListController {
 
             //call checkDescription() to make sure that the description is between 1 and  256 characters
             boolean valid = inputV.checkDescription(strDescription);
+            //send an alert if there is a description violation
             if (!valid) {
                 Alert des = new Alert(Alert.AlertType.ERROR);
                 des.setContentText("Item descriptions must be between 1 and 256 characters.");
@@ -181,6 +182,7 @@ public class ToDoListController {
                     ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
                     updateListView(view);
                 } else {
+                    //send an alert if there is a due date violation
                     Alert date = new Alert(Alert.AlertType.ERROR);
                     date.setContentText("Due dates must be valid within the Gregorian Calendar and in the format YYYY-MM-DD (Year-Month-Day).");
                     date.show();
@@ -189,6 +191,7 @@ public class ToDoListController {
         }
     }
 
+    //This method opens a dialogue box for the user to edit all attributes of an item.
     @FXML
     public void bEditItemClicked(ActionEvent actionEvent) {
 
@@ -245,6 +248,7 @@ public class ToDoListController {
             //call checkDescription() to make sure that the description is between 1 and  256 characters
             boolean valid = inputV.checkDescription(strDescription);
             if (!valid) {
+                //Send an alert if there is a description violation
                 Alert des = new Alert(Alert.AlertType.ERROR);
                 des.setContentText("Item descriptions must be between 1 and 256 characters.");
                 des.show();
@@ -256,6 +260,7 @@ public class ToDoListController {
                     ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
                     updateListView(view);
                 } else {
+                    //Send an alert if there is a due date violation
                     Alert date = new Alert(Alert.AlertType.ERROR);
                     date.setContentText("Due dates must be valid within the Gregorian Calendar and in the format YYYY-MM-DD (Year-Month-Day).");
                     date.show();
@@ -290,6 +295,7 @@ public class ToDoListController {
         updateListView(view);
     }
 
+    //This method displays the dedication when the dedication menu item is clicked.
     @FXML
     public void mDedication(ActionEvent actionEvent) {
         Alert dedication = new Alert(Alert.AlertType.NONE,"Dedicated to Rey.",ButtonType.OK);
@@ -297,6 +303,7 @@ public class ToDoListController {
         dedication.show();
     }
 
+    //This method displays the link to the README file if the Instructions menu item is clicked.
     @FXML
     public void mInstructions(ActionEvent actionEvent) {
         Alert dedication = new Alert(Alert.AlertType.NONE,"Please see full instructions on how to use this application at:\n" +

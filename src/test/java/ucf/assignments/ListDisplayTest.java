@@ -37,6 +37,7 @@ class ListDisplayTest {
 
     @Test
     @DisplayName("Display All")
+    //Test displaying all items
     void displayItems() {
         ListDisplay listDis = new ListDisplay();
         //Create a test TodoList
@@ -50,6 +51,7 @@ class ListDisplayTest {
         dueDate = "2021-07-10";
         test.addItem(description,dueDate);
 
+        //manually set menu selections
         CheckMenuItem completed = new CheckMenuItem();
         completed.setSelected(true);
         CheckMenuItem uncompleted = new CheckMenuItem();
@@ -57,6 +59,7 @@ class ListDisplayTest {
 
         ArrayList<Item> displayArray = listDis.displayItems(test,completed,uncompleted);
 
+        //test first item
         String actual = displayArray.get(0).description;
         String expected = "Completed Item.";
 
@@ -65,6 +68,7 @@ class ListDisplayTest {
 
     @Test
     @DisplayName("Display Uncompleted")
+    //Test displaying uncompleted items
     void displayUncompleted() {
         ListDisplay listDis = new ListDisplay();
         //Create a test TodoList
@@ -80,6 +84,7 @@ class ListDisplayTest {
 
         ArrayList<Item> displayArray = listDis.displayUncompleted(test);
 
+        //Test first item
         String actual = displayArray.get(0).description;
         String expected = "Uncompleted Item.";
 
@@ -94,6 +99,7 @@ class ListDisplayTest {
 
     @Test
     @DisplayName("Display Completed")
+    //Test display completed items
     void displayCompleted() {
         ListDisplay listDis = new ListDisplay();
         //Create a test TodoList
@@ -108,7 +114,7 @@ class ListDisplayTest {
         test.addItem(description,dueDate);
 
         ArrayList<Item> displayArray = listDis.displayCompleted(test);
-
+        //Test first item
         String actual = displayArray.get(0).description;
         String expected = "Completed Item.";
 

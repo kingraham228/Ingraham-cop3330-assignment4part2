@@ -12,6 +12,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Description alert test: Valid")
+    //General valid description test
     void checkDescription_valid() {
         InputValidator iv = new InputValidator();
         String test = "Test description.";
@@ -24,6 +25,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Description alert test: too long")
+    //Trying text that is too long
     void checkDescription_notvalidlong() {
         InputValidator iv = new InputValidator();
         String test = """
@@ -60,6 +62,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Description alert test: too short")
+    //Trying an empty string
     void checkDescription_notvalidshort() {
         InputValidator iv = new InputValidator();
         String test = "";
@@ -71,6 +74,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check month 0")
+    //Trying a month that is too small
     void checkMonth_0() {
         InputValidator iv = new InputValidator();
         int month = 0;
@@ -80,6 +84,7 @@ class InputValidatorTest {
     }
     @Test
     @DisplayName("Check month 6")
+    //Try a valid month
     void checkMonth_06() {
         InputValidator iv = new InputValidator();
         int month = 6;
@@ -90,6 +95,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check month 27")
+    //Try a month that is too big
     void checkMonth_27() {
         InputValidator iv = new InputValidator();
         int month = 27;
@@ -100,6 +106,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check Leap year 1996")
+    //Try a valid non-special leap year
     void checkLeapYear_1996() {
         InputValidator iv = new InputValidator();
         int year = 1996;
@@ -110,6 +117,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check Leap year 1700")
+    //Try a non 400 divisible non-leap year
     void checkLeapYear_1700() {
         InputValidator iv = new InputValidator();
         int year = 1700;
@@ -120,6 +128,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check Leap year 2000")
+    //Try a 400 divisible leap year
     void checkLeapYear_2000() {
         InputValidator iv = new InputValidator();
         int year = 2000;
@@ -130,6 +139,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check Leap year 1995")
+    //Try a non-leap year
     void checkLeapYear_1995() {
         InputValidator iv = new InputValidator();
         int year = 1995;
@@ -140,6 +150,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check February 29 not leap year")
+    //Try Feb special case with 29
     void checkDay_feb29() {
         InputValidator iv = new InputValidator();
         int month = 2;
@@ -152,6 +163,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check February 29 leap year")
+    //Try Feb special case with a leap year
     void checkDay_feb29leap() {
         InputValidator iv = new InputValidator();
         int month = 2;
@@ -164,6 +176,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check Sep. 31")
+    //Try valid 31 day month
     void checkDay_sep31() {
         InputValidator iv = new InputValidator();
         int month = 9;
@@ -176,6 +189,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check July 9")
+    //Try another valid month
     void checkDay_79() {
         InputValidator iv = new InputValidator();
         int month = 7;
@@ -188,6 +202,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check 12/31")
+    //Try largest valid month/day combo
     void checkDay_1231() {
         InputValidator iv = new InputValidator();
         int month = 12;
@@ -200,6 +215,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Check 0")
+    //Try non-valid 0 day
     void checkDay_0() {
         InputValidator iv = new InputValidator();
         int month = 1;
@@ -212,6 +228,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Valid date check")
+    //Try all the Feb special cases
     void checkDate_valid() {
         InputValidator iv = new InputValidator();
         String date = "2000-02-29";
@@ -222,6 +239,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("Date check 2/2 non leap")
+    //Try non-leap Feb special case
     void checkDate_nonleap() {
         InputValidator iv = new InputValidator();
         String date = "1800-02-29";
@@ -232,6 +250,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("out of format date")
+    //Try non-formatted date
     void checkDate_outFormat() {
         InputValidator iv = new InputValidator();
         String date = "2/29/2000";
@@ -242,6 +261,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("valid oct")
+    //Try double-digit month and day
     void checkDate_validOct() {
         InputValidator iv = new InputValidator();
         String date = "2021-10-30";
@@ -252,6 +272,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("valid Jan")
+    //Try smallest month and day
     void checkDate_validJan() {
         InputValidator iv = new InputValidator();
         String date = "2021-01-01";
@@ -262,6 +283,7 @@ class InputValidatorTest {
 
     @Test
     @DisplayName("not valid april")
+    //Try a non-valid for 30 day month
     void checkDate_nvApril() {
         InputValidator iv = new InputValidator();
         String date = "2023-04-31";

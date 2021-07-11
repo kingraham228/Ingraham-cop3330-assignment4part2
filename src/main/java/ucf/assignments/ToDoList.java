@@ -44,6 +44,7 @@ public class ToDoList {
         items.clear();
     }
 
+    //This method makes the items list accessible to other classes.
     public ArrayList<Item> getItems() {
         return items;
     }
