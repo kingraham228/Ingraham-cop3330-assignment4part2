@@ -57,7 +57,7 @@ public class ToDoListController {
                 status = "completed";
             }
 
-            String item = String.format("Description: %s   Due Date: %s   Status: %s", description, dueDate, status);
+            String item = String.format("Description: %s  Due Date: %s  Status: %s", description, dueDate, status);
             listView.getItems().add(item);
         }
     }
@@ -73,7 +73,7 @@ public class ToDoListController {
             ArrayList<Item> fileItems = fileM.openOneList(filePath);
             userList.addArrayList(fileItems);
             //Send error alert if the parser did not add any items.
-            if(fileItems.size()<1){
+            if (fileItems.size() < 1) {
                 Alert fileLoad = new Alert(Alert.AlertType.ERROR);
                 fileLoad.setContentText("To open a file you must choose a .txt file formatted so that there is one item per line. Each line should include the labels Description:, Due Date:, and Status: to open into the list.");
                 fileLoad.show();
@@ -298,7 +298,7 @@ public class ToDoListController {
     //This method displays the dedication when the dedication menu item is clicked.
     @FXML
     public void mDedication() {
-        Alert dedication = new Alert(Alert.AlertType.NONE,"Dedicated to Rey.",ButtonType.OK);
+        Alert dedication = new Alert(Alert.AlertType.NONE, "Dedicated to Rey.", ButtonType.OK);
         dedication.setTitle("Dedication");
         dedication.show();
     }
@@ -306,8 +306,8 @@ public class ToDoListController {
     //This method displays the link to the README file if the Instructions menu item is clicked.
     @FXML
     public void mInstructions() {
-        Alert dedication = new Alert(Alert.AlertType.NONE,"Please see full instructions on how to use this application at:\n" +
-                "https://github.com/kingraham228/Ingraham-cop3330-assignment4part2#readme",ButtonType.OK);
+        Alert dedication = new Alert(Alert.AlertType.NONE, "Please see full instructions on how to use this application at:\n" +
+                "https://github.com/kingraham228/Ingraham-cop3330-assignment4part2#readme", ButtonType.OK);
         dedication.setTitle("Instructions");
         dedication.show();
     }

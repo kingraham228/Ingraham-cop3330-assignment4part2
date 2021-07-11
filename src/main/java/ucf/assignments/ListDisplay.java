@@ -7,12 +7,10 @@ package ucf.assignments;
 import javafx.scene.control.CheckMenuItem;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 //This class manages the appearance of the TodoList items.
 public class ListDisplay {
-    private ArrayList<Item> displayArray = new ArrayList<>();
 
     //This method populates the displayArray according to the view options selected in teh GUI menu.
     public ArrayList<Item> displayItems(ToDoList userList,CheckMenuItem completed, CheckMenuItem uncompleted) {
@@ -25,8 +23,7 @@ public class ListDisplay {
         if(viewUncompleted&&!viewCompleted){
             return displayUncompleted(userList);
         }
-        displayArray = userList.getItems();
-        return displayArray;
+        return userList.getItems();
     }
 
     //This method creates a sublist of uncompleted items in the display array.
@@ -48,14 +45,9 @@ public class ListDisplay {
     public ArrayList<Item> sortDisplayArray(ToDoList ul) {
         ArrayList<Item> sortItems = ul.getItems();
         //define a comparator for dueDate
-        Comparator byDueDate = new Comparator<Item>() {
-            @Override
-            public int compare(Item o1, Item o2) {
-                return o1.dueDate.compareTo(o2.dueDate);
-            }
-        };
-        //sort displayArray with Collections.sort on dueDate
-        Collections.sort(sortItems,byDueDate);
+        Comparator<Item> byDueDate = Comparator.comparing(o -> o.dueDate);
+        //sort displayArray by dueDate
+        sortItems.sort(byDueDate);
         return sortItems;
     }
 

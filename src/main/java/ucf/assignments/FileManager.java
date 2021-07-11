@@ -30,7 +30,7 @@ public class FileManager {
                 } else {
                     status = "completed";
                 }
-                String item = String.format("Description: %s   Due Date: %s   Status: %s%n", description, dueDate, status);
+                String item = String.format("Description: %s  Due Date: %s  Status: %s%n", description, dueDate, status);
                 output.format(item);
             }
         } catch (SecurityException | FileNotFoundException | FormatterClosedException e) {

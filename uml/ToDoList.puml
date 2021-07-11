@@ -23,7 +23,6 @@ class FileManager{
 }
 
 class ListDisplay{
--displayArray: ArrayList
 +displayItems()
 +displayUncompleted()
 +displayCompleted()
