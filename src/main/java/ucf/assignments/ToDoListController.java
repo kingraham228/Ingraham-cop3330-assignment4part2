@@ -5,7 +5,6 @@ package ucf.assignments;
  */
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -65,7 +64,7 @@ public class ToDoListController {
 
     //This method initiates loading in a ToDoList from a file when the user selects the "Open" menu option
     @FXML
-    public void mLoadListClicked(ActionEvent actionEvent) {
+    public void mLoadListClicked() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open List");
         File file = fileChooser.showOpenDialog(null);
@@ -86,7 +85,7 @@ public class ToDoListController {
 
     //This method launches a filechooser to get the filename to save the todoList when the menu item is selected.
     @FXML
-    public void mSaveListClicked(ActionEvent actionEvent) {
+    public void mSaveListClicked() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save List");
         fileChooser.setInitialFileName("mytodolist.txt");
@@ -101,7 +100,7 @@ public class ToDoListController {
 
     //This method updates the items list when the user clicks the "Display Uncompleted" menu item
     @FXML
-    public void mDisplayUncompletedClicked(ActionEvent actionEvent) {
+    public void mDisplayUncompletedClicked() {
         ToDoList preserve = userList;
         ArrayList<Item> view = listDis.displayItems(preserve, mCheckCompleted, mCheckUncompleted);
         updateListView(view);
@@ -109,24 +108,24 @@ public class ToDoListController {
 
     //This method updates the items list when the user clicks the "Display Completed" menu item
     @FXML
-    public void mDisplayCompletedClicked(ActionEvent actionEvent) {
+    public void mDisplayCompletedClicked() {
         ToDoList preserve = userList;
         ArrayList<Item> view = listDis.displayItems(preserve, mCheckCompleted, mCheckUncompleted);
         updateListView(view);
     }
 
     @FXML
-    public void mSortDueDateClicked(ActionEvent actionEvent) {
+    public void mSortDueDateClicked() {
         //call sortDisplayArray()
         //call updateListView() with getDisplayArray()
     }
 
     //This method adds an item to the ToDoList when the user clicks the Add Item button
     @FXML
-    public void bAddItemClicked(ActionEvent actionEvent) {
+    public void bAddItemClicked() {
         //open a text input dialogue to get user item input
         //code adapted from https://stackoverflow.com/questions/31556373/javafx-dialog-with-2-input-fields
-        Dialog<Pair<String, String>> dialog = new Dialog<Pair<String, String>>();
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Add Item");
 
         ButtonType loginButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
@@ -149,7 +148,7 @@ public class ToDoListController {
 
         dialog.getDialogPane().setContent(gridPane);
 
-        Platform.runLater(() -> description.requestFocus());
+        Platform.runLater(description::requestFocus);
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
                 return new Pair<>(description.getText(), dueDate.getText());
@@ -159,8 +158,8 @@ public class ToDoListController {
 
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
-        String strDueDate = "";
-        String strDescription = "";
+        String strDueDate;
+        String strDescription;
 
         if (result.isPresent()) {
             strDescription = description.getText();
@@ -193,11 +192,11 @@ public class ToDoListController {
 
     //This method opens a dialogue box for the user to edit all attributes of an item.
     @FXML
-    public void bEditItemClicked(ActionEvent actionEvent) {
+    public void bEditItemClicked() {
 
         int index = listView.getSelectionModel().getSelectedIndex();
         //open a text input dialogue
-        Dialog<Pair<String, String>> dialog = new Dialog<Pair<String, String>>();
+        Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Edit Item");
 
         ButtonType loginButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
@@ -236,9 +235,9 @@ public class ToDoListController {
 
         Optional<Pair<String, String>> result = dialog.showAndWait();
 
-        String strDueDate = "";
-        String strDescription = "";
-        boolean complete = userList.getItems().get(index).completeStatus;
+        String strDueDate;
+        String strDescription;
+        boolean complete;
 
         if (result.isPresent()) {
             strDescription = description.getText();
@@ -271,7 +270,7 @@ public class ToDoListController {
 
     //This method removes an item from the ToDoList when the "Delete Item" button is pressed.
     @FXML
-    public void bDeleteItemClicked(ActionEvent actionEvent) {
+    public void bDeleteItemClicked() {
         int index = listView.getSelectionModel().getSelectedIndex();
         userList.removeItem(index);
         ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
@@ -280,7 +279,7 @@ public class ToDoListController {
 
     //This method marks a ToDoList item as complete when the user clicks the "Complete Item" button
     @FXML
-    public void bCompleteItemClicked(ActionEvent actionEvent) {
+    public void bCompleteItemClicked() {
         int index = listView.getSelectionModel().getSelectedIndex();
         userList.markComplete(index);
         ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
@@ -289,7 +288,7 @@ public class ToDoListController {
 
     //This method clears all items in the list when the "Clear List" button is clicked.
     @FXML
-    public void bClearList(ActionEvent actionEvent) {
+    public void bClearList() {
         userList.clearItems();
         ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
         updateListView(view);
@@ -297,7 +296,7 @@ public class ToDoListController {
 
     //This method displays the dedication when the dedication menu item is clicked.
     @FXML
-    public void mDedication(ActionEvent actionEvent) {
+    public void mDedication() {
         Alert dedication = new Alert(Alert.AlertType.NONE,"Dedicated to Rey.",ButtonType.OK);
         dedication.setTitle("Dedication");
         dedication.show();
@@ -305,7 +304,7 @@ public class ToDoListController {
 
     //This method displays the link to the README file if the Instructions menu item is clicked.
     @FXML
-    public void mInstructions(ActionEvent actionEvent) {
+    public void mInstructions() {
         Alert dedication = new Alert(Alert.AlertType.NONE,"Please see full instructions on how to use this application at:\n" +
                 "https://github.com/kingraham228/Ingraham-cop3330-assignment4part2#readme",ButtonType.OK);
         dedication.setTitle("Instructions");
