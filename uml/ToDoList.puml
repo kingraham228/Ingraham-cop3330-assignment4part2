@@ -69,5 +69,6 @@ ToDoController o-- ToDoList
 ToDoController o-- ListDisplay
 ToDoController o-- FileManager
 ToDoController o-- InputValidator
+FileManager o-- InputValidator
 ToDoList *-- Item
 @enduml

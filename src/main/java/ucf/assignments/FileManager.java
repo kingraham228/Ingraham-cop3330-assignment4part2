@@ -19,13 +19,13 @@ public class FileManager {
             output.format("To Do: %n");
             output.format("-------------------------%n");
             //print each item in the list to the file
-            for (int i = 0; i < listItems.size(); i++) {
-                String description = listItems.get(i).description;
-                String dueDate = listItems.get(i).dueDate;
-                String status = "";
+            for (Item listItem : listItems) {
+                String description = listItem.description;
+                String dueDate = listItem.dueDate;
+                String status;
 
                 //convert status booleans into readable strings
-                if (listItems.get(i).completeStatus == false) {
+                if (!listItem.completeStatus) {
                     status = "uncompleted";
                 } else {
                     status = "completed";
@@ -49,18 +49,15 @@ public class FileManager {
         } catch (IOException | NoSuchElementException | IllegalStateException e) {
             e.printStackTrace();
         }
-        //send string array data for parsing into an item list
-        ArrayList<Item> fileItems = parseFileData(fileData);
-
-        return fileItems;
+        //return item array data received from sending the string arraylist to teh parseFileData method
+        return parseFileData(fileData);
     }
 
     //This method parses data from a .txt file to create ToDoList items.
     public ArrayList<Item> parseFileData(ArrayList<String> fileData) {
         ArrayList<Item> fileItems = new ArrayList<>();
         //For each item in the string array, split the string into the item components
-        for (int i = 0; i < fileData.size(); i++) {
-            String analyze = fileData.get(i);
+        for (String analyze : fileData) {
             String[] pieces = analyze.split("Description: ");
             if (pieces.length > 1) {
                 String description = pieces[1];
@@ -74,19 +71,16 @@ public class FileManager {
                 if (dueDate.length() > 10) {
                     char[] dueDateChars = dueDate.toCharArray();
                     StringBuilder trimDate = new StringBuilder();
-                    for (int count = 0; count < dueDateChars.length; count++) {
-                        if (dueDateChars[count] != ' ') {
-                            trimDate.append(dueDateChars[count]);
+                    for (char dueDateChar : dueDateChars) {
+                        if (dueDateChar != ' ') {
+                            trimDate.append(dueDateChar);
                         }
                     }
                     dueDate = String.valueOf(trimDate);
                 }
                 String srStatus = pieces[1];
-                boolean status = false;
                 //Convert status strings to boolean values
-                if (srStatus.equalsIgnoreCase("completed")) {
-                    status = true;
-                }
+                boolean status = srStatus.equalsIgnoreCase("completed");
                 //Validate description and dueDate requirements
                 boolean desValid = iv.checkDescription(description);
                 boolean dateValid = iv.checkDate(dueDate);

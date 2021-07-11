@@ -4,10 +4,8 @@ package ucf.assignments;
  *  Copyright 2021 Kate Ingraham
  */
 
-import javafx.beans.property.BooleanProperty;
 import javafx.scene.control.CheckMenuItem;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 //This class manages the appearance of the TodoList items.
@@ -31,8 +29,7 @@ public class ListDisplay {
 
     //This method creates a sublist of uncompleted items in the display array.
     public ArrayList<Item> displayUncompleted(ToDoList ul) {
-        ArrayList<Item> viewItems = new ArrayList<>();
-        viewItems.addAll(ul.getItems());
+        ArrayList<Item> viewItems = new ArrayList<>(ul.getItems());
         viewItems.removeIf(checkView -> checkView.completeStatus);
         return viewItems;
 
@@ -40,8 +37,7 @@ public class ListDisplay {
 
     //This method creates a sublist of completed items in the display array.
     public ArrayList<Item> displayCompleted(ToDoList ul) {
-        ArrayList<Item> viewItems = new ArrayList<>();
-        viewItems.addAll(ul.getItems());
+        ArrayList<Item> viewItems = new ArrayList<>(ul.getItems());
         viewItems.removeIf(checkView -> !checkView.completeStatus);
         return viewItems;
     }
