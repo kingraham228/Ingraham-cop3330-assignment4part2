@@ -27,7 +27,7 @@ public class ToDoListController {
     public CheckMenuItem mCheckCompleted;
     //This attribute is the ListView in the GUI displaying the To Do List items
     @FXML
-    public ListView listView;
+    public ListView<String> listView;
 
 
     //ToDoList userList manages items in the ToDoList
