@@ -194,97 +194,124 @@ public class ToDoListController {
     //This method opens a dialogue box for the user to edit all attributes of an item.
     @FXML
     public void bEditItemClicked() {
-
+        //Add size check to avoid errors if the user clicks the edit button before there are any items in the list.
+        if(userList.getItems().size()>0){
         int index = listView.getSelectionModel().getSelectedIndex();
-        //open a text input dialogue
-        Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("Edit Item");
 
-        ButtonType loginButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
+            //open a text input dialogue
+            Dialog<Pair<String, String>> dialog = new Dialog<>();
+            dialog.setTitle("Edit Item");
 
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(20, 150, 10, 10));
+            ButtonType loginButtonType = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
-        //ask the user to input the new description and due date
-        TextField description = new TextField();
-        TextField dueDate = new TextField();
-        //Prefill with existing description and due date
-        description.setPromptText(userList.getItems().get(index).description);
-        dueDate.setPromptText(userList.getItems().get(index).dueDate);
-        CheckBox status = new CheckBox();
-        //prefill checkbox according to existing status
-        status.setSelected(userList.getItems().get(index).completeStatus);
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+            gridPane.setPadding(new Insets(20, 150, 10, 10));
 
-        gridPane.add(new Label("Item Description:"), 0, 0);
-        gridPane.add(description, 1, 0);
-        gridPane.add(new Label("Due Date:"), 0, 1);
-        gridPane.add(dueDate, 1, 1);
-        gridPane.add(new Label("Complete: "), 0, 2);
-        gridPane.add(status, 1, 2);
+            //ask the user to input the new description and due date
+            TextField description = new TextField();
+            TextField dueDate = new TextField();
+            //Prefill with existing description and due date
+            description.setPromptText(userList.getItems().get(index).description);
+            dueDate.setPromptText(userList.getItems().get(index).dueDate);
+            CheckBox status = new CheckBox();
+            //prefill checkbox according to existing status
+            status.setSelected(userList.getItems().get(index).completeStatus);
 
-        dialog.getDialogPane().setContent(gridPane);
+            gridPane.add(new Label("Item Description:"), 0, 0);
+            gridPane.add(description, 1, 0);
+            gridPane.add(new Label("Due Date:"), 0, 1);
+            gridPane.add(dueDate, 1, 1);
+            gridPane.add(new Label("Complete: "), 0, 2);
+            gridPane.add(status, 1, 2);
 
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == loginButtonType) {
-                return new Pair<>(description.getText(), dueDate.getText());
-            }
-            return null;
-        });
+            dialog.getDialogPane().setContent(gridPane);
 
-        Optional<Pair<String, String>> result = dialog.showAndWait();
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == loginButtonType) {
+                    return new Pair<>(description.getText(), dueDate.getText());
+                }
+                return null;
+            });
 
-        String strDueDate;
-        String strDescription;
-        boolean complete;
+            Optional<Pair<String, String>> result = dialog.showAndWait();
 
-        if (result.isPresent()) {
-            strDescription = description.getText();
-            strDueDate = dueDate.getText();
-            complete = status.selectedProperty().getValue();
+            String strDueDate;
+            String strDescription;
+            boolean complete;
 
-            //call checkDescription() to make sure that the description is between 1 and  256 characters
-            boolean valid = inputV.checkDescription(strDescription);
-            if (!valid) {
-                //Send an alert if there is a description violation
-                Alert des = new Alert(Alert.AlertType.ERROR);
-                des.setContentText("Item descriptions must be between 1 and 256 characters.");
-                des.show();
-            } else {
-                valid = inputV.checkDate(strDueDate);
-                if (valid) {
-                    userList.editItem(strDescription, strDueDate, index, complete);
+            if (result.isPresent()) {
+                strDescription = description.getText();
+                strDueDate = dueDate.getText();
+                complete = status.selectedProperty().getValue();
 
-                    ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
-                    updateListView(view);
+                //call checkDescription() to make sure that the description is between 1 and  256 characters
+                boolean valid = inputV.checkDescription(strDescription);
+                if (!valid) {
+                    //Send an alert if there is a description violation
+                    Alert des = new Alert(Alert.AlertType.ERROR);
+                    des.setContentText("Item descriptions must be between 1 and 256 characters.");
+                    des.show();
                 } else {
-                    //Send an alert if there is a due date violation
-                    Alert date = new Alert(Alert.AlertType.ERROR);
-                    date.setContentText("Due dates must be valid within the Gregorian Calendar and in the format YYYY-MM-DD (Year-Month-Day).");
-                    date.show();
+                    valid = inputV.checkDate(strDueDate);
+                    if (valid) {
+                        userList.editItem(strDescription, strDueDate, index, complete);
+
+                        ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
+                        updateListView(view);
+                    } else {
+                        //Send an alert if there is a due date violation
+                        Alert date = new Alert(Alert.AlertType.ERROR);
+                        date.setContentText("Due dates must be valid within the Gregorian Calendar and in the format YYYY-MM-DD (Year-Month-Day).");
+                        date.show();
+                    }
                 }
             }
+        }else{
+            //Send an alert if the user tries to edit before the list has items
+            Alert emptyList = new Alert(Alert.AlertType.ERROR);
+            emptyList.setContentText("You must have an item in the list before you can edit an item.\n" +
+                    "Click the \"Add Item\" button to add an item.");
+            emptyList.show();
         }
     }
 
     //This method removes an item from the ToDoList when the "Delete Item" button is pressed.
     @FXML
     public void bDeleteItemClicked() {
-        int index = listView.getSelectionModel().getSelectedIndex();
-        userList.removeItem(index);
-        ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
-        updateListView(view);
+        //Check size to avoid errors
+        if(userList.getItems().size()>0) {
+            int index = listView.getSelectionModel().getSelectedIndex();
+            userList.removeItem(index);
+            ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
+            updateListView(view);
+        } else{
+            //Send an alert if the user tries to delete an item before the list has items
+            Alert emptyList = new Alert(Alert.AlertType.ERROR);
+            emptyList.setContentText("You must have an item in the list before you can delete an item.\n" +
+                    "Click the \"Add Item\" button to add an item.");
+            emptyList.show();
+        }
     }
 
     //This method marks a ToDoList item as complete when the user clicks the "Complete Item" button
     @FXML
     public void bCompleteItemClicked() {
-        int index = listView.getSelectionModel().getSelectedIndex();
-        userList.markComplete(index);
-        ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
-        updateListView(view);
+        //Check size to avoid errors
+        if(userList.getItems().size()>0) {
+            int index = listView.getSelectionModel().getSelectedIndex();
+            userList.markComplete(index);
+            ArrayList<Item> view = listDis.displayItems(userList, mCheckCompleted, mCheckUncompleted);
+            updateListView(view);
+        } else{
+            //Send an alert if the user tries to complete an item before the list has items
+            Alert emptyList = new Alert(Alert.AlertType.ERROR);
+            emptyList.setContentText("You must have an item in the list before you can complete an item.\n" +
+                    "Click the \"Add Item\" button to add an item.");
+            emptyList.show();
+        }
     }
 
     //This method clears all items in the list when the "Clear List" button is clicked.
